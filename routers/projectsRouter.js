@@ -70,6 +70,16 @@ router.put('/:id', validateProject, validateProjectId, (req, res)=>{
         })
 })
 
+router.put('/:id/actions', validateAction, validateProjectId, (req, res) =>{
+    Actions.update(req.params.id, req.body)
+        .then(updatedAction =>{
+            res.status(201).json({updatedAction})
+        })
+        .catch(()=>{
+            res.status(500).json({errorMessage: 'Failed to post action'})
+        })
+})
+
 router.delete('/:id', validateProjectId, (req, res)=>{
     Projects.remove(req.params.id)
         .then(deleted=>{
@@ -78,6 +88,10 @@ router.delete('/:id', validateProjectId, (req, res)=>{
         .catch(err=>{
             res.status(500).json({errorMessage: 'Failed to delete that project'})
         })
+})
+
+router.delete('/:id/actions', validateProjectId, (req, res)=>{
+    console.log('delete req', req)
 })
 
 
