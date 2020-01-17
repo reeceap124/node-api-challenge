@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+        - Server side routing and Middleware are two of the big ones that we worked with this week. 
+
 - [ ] Describe Middleware?
+
+        - Middleware is like a function that can be inserted in the lineup of tasks that a server performs. They can be global or local depending on where and how they are imported into a route.
 
 - [ ] Describe a Resource?
 
+        - Everything is a resource. All of the nouns that you will be dealing with and trying to keep track of as you're building out the backend
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+        -a status code in the 200's
+
 - [ ] How can we partition our application into sub-applications?
+
+        -Routing???
 
 ## Minimum Viable Product
 
