@@ -7,6 +7,8 @@ const Actions = require('../data/helpers/actionModel');
 //imported middleware
 const validateProject = require('../middleware/validateProject');
 const validateProjectId = require('../middleware/validateProjectId');
+const validateAction = require('../middleware/validateAction');
+
 
 router.get('/', (req, res)=>{
     Projects.get()
@@ -28,6 +30,16 @@ router.get('/:id', validateProjectId, (req, res)=>{
         })
 })
 
+router.get('/:id/actions', validateProjectId, (req, res)=>{
+    Projects.getProjectActions(req.params.id)
+        .then(actions=>{
+            res.status(200).json({actions})
+        })
+        .catch(err=>{
+            res.status(500).json({errorMessage: 'Failed to get project actions'})
+        })
+})
+
 router.post('/', validateProject, (req, res)=>{
     Projects.insert(req.body)
         .then(project=>{
@@ -35,6 +47,16 @@ router.post('/', validateProject, (req, res)=>{
         })
         .catch(err=>{
             res.status(500).json({errorMessage: 'Failed to make that project'})
+        })
+})
+
+router.post('/:id/actions', validateAction, validateProjectId, (req, res)=>{
+    Actions.insert(req.body)
+        .then(action=>{
+            res.status(201).json({action})
+        })
+        .catch(()=>{
+            res.status(500).json({errorMessage: 'Failed to create that action'})
         })
 })
 
